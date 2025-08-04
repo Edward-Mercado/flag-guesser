@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from .extra_functions import snake_case, get_flag_emoji
+from .extra_functions import snake_case, get_flag_image
 
 # Create your views here.
 
 def home(request):
     template = loader.get_template('home.html')
     context = { 
-               "flag": get_flag_emoji("DE"),
+               "flag": "",
                }
     
     return HttpResponse(template.render(context, request))
