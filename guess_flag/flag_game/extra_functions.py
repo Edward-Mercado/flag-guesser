@@ -1,8 +1,26 @@
 from flagpy import FlagIdentifier
-import os, json
+import os, json, random
 
 def snake_case(input_string):
     return input_string.lower().replace(" ", "_")
+
+def convert_to_underscore(input_string, integer_likelihood): # converts strings to a bunch of underscores for hint
+    list_of_characters = list(input_string)
+    output_string = ""
+    
+    for character in list_of_characters:
+        if character == " ":
+            output_string += "   "
+        else:
+            if integer_likelihood > 0:
+                if random.randint(1, integer_likelihood) == integer_likelihood:
+                    output_string += character
+                else:
+                    output_string += "_ "
+            else:
+                output_string += "_ "
+                
+    return output_string
 
 def get_flag_image(country_name):
 
@@ -27,8 +45,11 @@ def get_flag_image(country_name):
             json.dump(valid_countries, file, indent=4)
         
 
-add_countries =  ["south sudan"]
-
-for country in add_countries:
-    get_flag_image(country)
-    print("successfully added", country)
+def get_random_country():
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(BASE_DIR, "valid_countries.json")
+    
+    with open(file_path, "r") as file:
+        valid_countries = list(json.load(file))
+        
+    return random.choice(valid_countries)

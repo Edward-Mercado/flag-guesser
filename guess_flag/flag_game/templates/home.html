@@ -9,8 +9,13 @@
     <body>
         <h1> FLAG GUESSER </h1>
         <div class = "home_div">
-            <h1> {{ flag }} </h1>
-            <a href="/marathon-mode"> MARATHON </a>
+            <img src="{% static flag %}" alt="Flag" class="flag-image">
+            <form method="POST" action="/marathon-mode-start/">
+                {% csrf_token %}
+                <input type="checkbox" id="hints_on" name="hints_on"> </input>
+                <label for="hints_on"> Show Hints </label>
+                <button type="submit" style="width: 95%;"> START MARATHON MODE </button>
+            </form>
         </div>
     </body>
 
