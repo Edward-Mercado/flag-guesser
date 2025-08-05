@@ -30,19 +30,18 @@ def get_flag_image(country_name):
     with open(file_path, "r") as file:
         valid_countries = list(json.load(file))
         
-    if country_name not in valid_countries:
-        flag_identifier = FlagIdentifier()
-        flag_image = flag_identifier.get_flag_img(country_name)
+    flag_identifier = FlagIdentifier()
+    flag_image = flag_identifier.get_flag_img(country_name)
         
-        folder_path = os.path.join("images", "generated_flags")
-        os.makedirs(folder_path, exist_ok=True)
+    folder_path = os.path.join("images", "generated_flags")
+    os.makedirs(folder_path, exist_ok=True)
         
-        file_path = os.path.join(folder_path, snake_case(f"{country_name}.png"))
-        flag_image.save(file_path)
+    file_path = os.path.join(folder_path, snake_case(f"{country_name}.png"))
+    flag_image.save(file_path)
         
-        valid_countries.append(snake_case(country_name))
-        with open("valid_countries.json", "w") as file:
-            json.dump(valid_countries, file, indent=4)
+    valid_countries.append(snake_case(country_name))
+    with open("valid_countries.json", "w") as file:
+        json.dump(valid_countries, file, indent=4)
         
 
 def get_random_country():
@@ -53,3 +52,5 @@ def get_random_country():
         valid_countries = list(json.load(file))
         
     return random.choice(valid_countries)
+
+get_flag_image("kuwait")

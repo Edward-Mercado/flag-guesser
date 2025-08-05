@@ -7,9 +7,9 @@ from .extra_functions import snake_case, get_random_country, convert_to_undersco
 
 def home(request):
     template = loader.get_template('home.html')
-    context = { 
-               "flag": "generated_flags/south_sudan.png",
-               }
+    context = {
+        "message": "welcome to flag guesser",
+    }
     
     return HttpResponse(template.render(context, request))
 
@@ -26,16 +26,28 @@ def marathon_mode(request):
         "correct_answer": next_country,
         "flag": flag_file_path,
         "hints_on" : hints_on,
-        "hint": convert_to_underscore(next_country, 5 - int(next_country.count(" ")))
+        "hint": convert_to_underscore(next_country, 3 + int(next_country.count(" ")))
     }
-    print(context['hint'])
 
     return HttpResponse(template.render(context, request))
+
+def regular_game_processing(request):
+    try:
+        number_of_questions = int(request.POST.get("number_of_questions", 0))
+    except TypeError:
+        context = {
+            "message"
+        }
+        return HttpResponseRedirect("/", )
+
+def regular_game(request):
+    pass
 
 def verify_answer(request): # this is the actual function that gets called and loads a new country endlessly
     streak = request.POST.get('current_streak', -1)
     guess = request.POST.get("guess", "").lower()
     correct_answer = request.POST.get("correct_answer", "").lower() 
+    hints_on = request.POST.get("hints_on", "off")
     
     if guess.strip().lower() == correct_answer.strip().lower():
         next_country = get_random_country()
@@ -48,9 +60,10 @@ def verify_answer(request): # this is the actual function that gets called and l
             "current_streak": int(streak) + 1,
             "correct_answer": next_country,
             "flag": flag_file_path,
+            "hints_on": hints_on, 
             "hint": convert_to_underscore(next_country, integer_likelihood)
         }
-        print(context['hint'])
+        
     else:
         template = loader.get_template('loser.html')
         context = {}
