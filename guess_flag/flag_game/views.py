@@ -34,9 +34,14 @@ def marathon_mode(request):
 def regular_game_processing(request):
     try:
         number_of_questions = int(request.POST.get("number_of_questions", 0))
+        if number_of_questions < 1:
+            context = {
+            "message": "enter a valid number of questions man"
+            }
+            return HttpResponseRedirect("/", )
     except TypeError:
         context = {
-            "message"
+            "message": "enter a valid number of questions man"
         }
         return HttpResponseRedirect("/", )
 
