@@ -52,5 +52,3 @@ def get_random_country():
         valid_countries = list(json.load(file))
         
     return random.choice(valid_countries)
-
-get_flag_image("kuwait")
