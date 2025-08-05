@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html> 
+    <head>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <title> MARATHON MODE </title>
+        <script>
+            const flagUrls = {{ flag_urls|safe|json_script:"flag-urls" }};
+            const correctAnswers = {{ correct_answers|safe|json_script:"correct-answers" }};
+            const hints = {{ hints|safe|json_script:"hints" }};
+            const hintsOn = {{ hints_on }};
+        </script>
+    </head>
+
+    <body>
+        <h1> MARATHON MODE </h1>
+        <div class = "home_div">
+            <div>
+                <form method="POST" action="/marathon-mode/">
+                {% csrf_token %}
+                
+                <script>
+                    
+                </script>
+                </form>
+
+            </div>
+
+            
+            <a href="/"> HOME </a>
+        </div>
+    </body>

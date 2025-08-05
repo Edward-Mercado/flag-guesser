@@ -32,21 +32,42 @@ def marathon_mode(request):
     return HttpResponse(template.render(context, request))
 
 def regular_game_processing(request):
+    successful = True
     try:
         number_of_questions = int(request.POST.get("number_of_questions", 0))
         if number_of_questions < 1:
-            context = {
-            "message": "enter a valid number of questions man"
-            }
-            return HttpResponseRedirect("/", )
-    except TypeError:
+            home(request)
+            successful = False
+        elif number_of_questions > 100:
+            number_of_questions = 100
+        
+    except:
+        successful = False
+    
+    if successful == True:
+        correct_answers = [ ]
+        flag_urls = [ ]
+        hints = [ ]
+        hints_on = request.POST.get("hints_on", "off")
+        
+        for i in range(number_of_questions):
+            country_addition = get_random_country()
+            correct_answers.append(country_addition)
+            flag_urls.append(f"generated_flags/{snake_case(country_addition)}.png")
+            if hints_on == "on":
+                hints.append(convert_to_underscore(country_addition, 3 + int(country_addition.count(" "))))
+            
+        template = loader.get_template("regular_game.html")
         context = {
-            "message": "enter a valid number of questions man"
+            "number_of_questions": number_of_questions,
+            "correct_answers": correct_answers,
+            "flag_urls": flag_urls,
+            "hints_on": hints_on,
+            "hints": hints,
         }
-        return HttpResponseRedirect("/", )
-
-def regular_game(request):
-    pass
+        return HttpResponse(template.render(context, request))
+    else:
+        return redirect("/")
 
 def verify_answer(request): # this is the actual function that gets called and loads a new country endlessly
     streak = request.POST.get('current_streak', -1)
