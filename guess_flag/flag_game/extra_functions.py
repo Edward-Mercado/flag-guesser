@@ -52,3 +52,50 @@ def get_random_country():
         valid_countries = list(json.load(file))
         
     return random.choice(valid_countries)
+
+def get_list_of_countries(number_of_questions):
+    amount_remaining = number_of_questions # how many countries we need to get
+    
+    potential_flag_urls, potential_correct_answers, potential_hints = [], [], []
+    flag_urls, correct_answers, hints = [], [], []
+        
+    done = False    
+    while done == False:
+        for i in range(amount_remaining):
+            country_addition = get_random_country()
+            potential_correct_answers.append(country_addition)
+            potential_flag_urls.append(f"generated_flags/{snake_case(country_addition)}.png")
+            potential_hints.append(convert_to_underscore(country_addition, 3 + int(country_addition.count(" "))))
+                
+        new_countries = 0        
+                
+        for item in potential_correct_answers:
+            if item not in correct_answers:
+                new_countries += 1
+                correct_answers.append(item)
+                flag_urls.append(potential_flag_urls[potential_correct_answers.index(item)])
+                hints.append(potential_hints[potential_correct_answers.index(item)])
+            
+        amount_remaining -= new_countries 
+        
+        if amount_remaining <= 0:
+            done = True
+            if len(correct_answers) > number_of_questions:
+                for i in range(number_of_questions):
+                    correct_answers.remove(correct_answers[0])
+                    flag_urls.remove(flag_urls[0])
+                    hints.remove(hints[0])
+                    
+        potential_correct_answers.clear()
+        potential_flag_urls.clear()
+        potential_hints.clear()
+            
+    questions_list = []
+    for i in range(number_of_questions):    
+        questions_list.append({
+            "correct_answer": correct_answers[i],
+            "flag_url" : flag_urls[i],
+            "hint": hints[i],
+        })
+        
+    return questions_list

@@ -3,25 +3,27 @@
 <html> 
     <head>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
-        <title> MARATHON MODE </title>
-        <script>
-            const flagUrls = {{ flag_urls|safe|json_script:"flag-urls" }};
-            const correctAnswers = {{ correct_answers|safe|json_script:"correct-answers" }};
-            const hints = {{ hints|safe|json_script:"hints" }};
-            const hintsOn = {{ hints_on }};
-        </script>
+        <title> REGULAR GAME </title>
     </head>
 
     <body>
-        <h1> MARATHON MODE </h1>
+        <h1> REGULAR GAME </h1>
         <div class = "home_div">
             <div>
-                <form method="POST" action="/marathon-mode/">
+                <form method="POST" action="/regular-game-answers">
                 {% csrf_token %}
-                
-                <script>
-                    
-                </script>
+                {% for question in questions_list %}
+                <div>
+                    <img src="{% static question.flag_url %}" alt="Flag" class="flag-image">    
+                    <!-- <p> {{ question.correct_answer }} </p> --> 
+                    {% if hints_on == "on" %}
+                        <p> hint: {{ question.hint }} </p>
+                    {% endif %}
+                    <label for="guess_{{ forloop.counter }}"> Flag Name: </label>
+                    <input type="text" id="guess_{{ forloop.counter }}" name="guess">
+                </div>
+                {% endfor %}
+                <button type="submit" style="width: 95%;"> SUBMIT YOUR WORK! </button>
                 </form>
 
             </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from .extra_functions import snake_case, get_random_country, convert_to_underscore
+from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries
 
 # Create your views here.
 
@@ -45,31 +45,21 @@ def regular_game_processing(request):
         successful = False
     
     if successful == True:
-        correct_answers = [ ]
-        flag_urls = [ ]
-        hints = [ ]
-        hints_on = request.POST.get("hints_on", "off")
         
-        for i in range(number_of_questions):
-            country_addition = get_random_country()
-            correct_answers.append(country_addition)
-            flag_urls.append(f"generated_flags/{snake_case(country_addition)}.png")
-            if hints_on == "on":
-                hints.append(convert_to_underscore(country_addition, 3 + int(country_addition.count(" "))))
-            
+        hints_on = request.POST.get("hints_on", "off")
+
         template = loader.get_template("regular_game.html")
         context = {
-            "number_of_questions": number_of_questions,
-            "correct_answers": correct_answers,
-            "flag_urls": flag_urls,
+            "number_of_questions": range(number_of_questions),
+            "questions_list" : get_list_of_countries(number_of_questions),
             "hints_on": hints_on,
-            "hints": hints,
         }
+        
         return HttpResponse(template.render(context, request))
     else:
         return redirect("/")
 
-def verify_answer(request): # this is the actual function that gets called and loads a new country endlessly
+def verify_answer_marathon(request): # this is the actual function that gets called and loads a new country endlessly
     streak = request.POST.get('current_streak', -1)
     guess = request.POST.get("guess", "").lower()
     correct_answer = request.POST.get("correct_answer", "").lower() 
@@ -101,3 +91,6 @@ def loser(request):
     context = { }
     
     return HttpResponse(template.render(context, request))
+
+def verify_answer_regular():
+    print('hello world')
