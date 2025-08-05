@@ -10,7 +10,7 @@
         <h1> REGULAR GAME </h1>
         <div class = "home_div">
             <div>
-                <form method="POST" action="/regular-game-answers">
+                <form method="POST" action="/regular-game-answers/">
                 {% csrf_token %}
                 {% for question in questions_list %}
                 <div>
@@ -19,8 +19,10 @@
                     {% if hints_on == "on" %}
                         <p> hint: {{ question.hint }} </p>
                     {% endif %}
+                    <input type="hidden" name="correct_answer_{{forloop.counter}}" value="{{ question.correct_answer }}">
+                    <input type="hidden" name="questions_list" value="{{ questions_list }}"
                     <label for="guess_{{ forloop.counter }}"> Flag Name: </label>
-                    <input type="text" id="guess_{{ forloop.counter }}" name="guess">
+                    <input type="text" name="guess_{{ forloop.counter }}">
                 </div>
                 {% endfor %}
                 <button type="submit" style="width: 95%;"> SUBMIT YOUR WORK! </button>

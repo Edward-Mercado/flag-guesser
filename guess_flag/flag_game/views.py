@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries
+from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries, convert_to_dictionary_list
 
 # Create your views here.
 
@@ -92,5 +92,28 @@ def loser(request):
     
     return HttpResponse(template.render(context, request))
 
-def verify_answer_regular():
-    print('hello world')
+def verify_answer_regular(request):
+    number_of_questions = request.POST.get("number_of_questions", 1)
+    unconverted_questions_list = request.POST.get("questions_list", "this is pretty bad guys")
+    correct_guess_count = 0
+    correct_guesses = []
+    incorrect_guess_count = 0
+    incorrect_guesses = []
+    
+    questions_list = convert_to_dictionary_list(unconverted_questions_list)
+    
+    for i in range(number_of_questions):
+        guess = request.POST.get(f"guess_{i}", "invalid_guess")
+        print(unconverted_questions_list)
+        if unconverted_questions_list[i] == guess.lower():
+            correct_guess_count += 1
+            correct_guesses.append(unconverted_questions_list[i])
+        else:
+            incorrect_guess_count += 1
+            incorrect_guesses.append(unconverted_questions_list[i])
+    
+    return HttpResponse("placeholder")
+
+
+    
+    

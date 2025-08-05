@@ -99,3 +99,38 @@ def get_list_of_countries(number_of_questions):
         })
         
     return questions_list
+
+def convert_to_dictionary_list(unconverted_questions_list):
+    """
+    goal: convert a list-of-dictionary-like string to an actual list of dictionaries
+    reference:
+    [{'correct_answer': 'senegal', 'flag_url': 'generated_flags/senegal.png', 'hint': '_ _ _ e_ al'}, 
+    {'correct_answer': 'lithuania', 'flag_url': 'generated_flags/lithuania.png', 'hint': '_ _ t_ _ _ n_ _ '}, 
+    {'correct_answer': 'canada', 'flag_url': 'generated_flags/canada.png', 'hint': 'ca_ ada'}]
+    
+    handle each key differently
+    remove the first however many letters
+    remove the last character (closing ')
+    leave the excess
+    recreate dictionaries
+    
+    
+    convert string into a list
+    for i in range 20: remove word[0]
+    add the remaining letters to a string
+    call it word
+    do the rest for the others yk
+    """
+    
+    split_keys = unconverted_questions_list.split(",")
+    for word in split_keys:
+        word = list(word)
+        if word[3] == "c":
+            word.strip()
+            print(word)
+    
+convert_to_dictionary_list(
+    str([{'correct_answer': 'senegal', 'flag_url': 'generated_flags/senegal.png', 'hint': '_ _ _ e_ al'}, 
+    {'correct_answer': 'lithuania', 'flag_url': 'generated_flags/lithuania.png', 'hint': '_ _ t_ _ _ n_ _ '}, 
+    {'correct_answer': 'canada', 'flag_url': 'generated_flags/canada.png', 'hint': 'ca_ ada'}])
+)
