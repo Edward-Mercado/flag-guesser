@@ -7,10 +7,7 @@ from .extra_functions import convert_to_dictionary_list, get_accuracy_results
 
 def home(request):
     template = loader.get_template('home.html')
-    context = {
-        "message": "welcome to flag guesser",
-    }
-    
+    context = {}
     return HttpResponse(template.render(context, request))
 
 def marathon_mode(request):

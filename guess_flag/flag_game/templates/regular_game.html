@@ -13,10 +13,10 @@
             {% csrf_token %}
             <input type="hidden" name="questions_list" value="{{ questions_list }}">
             <input type="hidden" name="hints_on" value="{{ hints_on }}">
-            <div style="display: flex; flex-flow: row wrap">
+            <div style="display: flex; flex-flow: row wrap; border: solid black 4px; margin: 4px;">
                 {% for question in questions_list %}
-                <div style="max-height: 100px;">
-                    <img src="{% static question.flag_url %}" alt="Flag" class="flag-image">    
+                <div style="border: solid black 4px; margin: 4px;">
+                    <img src="{% static question.flag_url %}" style="border: solid black 4px" alt="Flag" class="flag-image">    
                     <!-- <p> {{ question.correct_answer }} </p> --> 
                         {% if hints_on == "on" %}
                         <p> hint: {{ question.hint }} </p>

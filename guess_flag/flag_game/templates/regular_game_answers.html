@@ -13,11 +13,11 @@
                 <h2> Amount Correct: {{ number_correct }} </h2>
                 <h2> Amount Incorrect: {{ number_incorrect}} </h2>
                 <h2> Hints {{ were_hints_on }} on. </h2>
-                <div style="display: flex; flex-flow: row wrap">
+                <div style="display: flex; flex-flow: row wrap; border: solid black 4px; margin: 4px;">
                     {% for question_result in question_results %}
-                        <div style="margin: 20px; padding: 20px;">
+                        <div style="margin: 20px; padding: 20px; border: solid black 4px; margin: 4px;">
                         <p> {{ question_result.result }} </p>
-                        <img src="{% static question_result.flag_url %}" alt="Flag" class="flag-image">  
+                        <img src="{% static question_result.flag_url %}" style="border: solid black 4px" alt="Flag" class="flag-image">  
                         <p> Correct Answer: {{ question_result.correct_answer }} </p>
                         <p> You guessed: {{ question_result.guess }} </p>
                         </div>

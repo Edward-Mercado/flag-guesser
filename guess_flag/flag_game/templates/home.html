@@ -7,25 +7,34 @@
     </head>
 
     <body>
-        <h1> FLAG GUESSER </h1>
+        <h1 class="title"> FLAG GUESSER </h1>
         <div class = "home_div">
-            <h1> {{ message }} </h1>
-
-            <form method="POST" action="/marathon-mode-start/">
-                {% csrf_token %}
-                <input type="checkbox" id="hints_on" name="hints_on"> </input>
-                <label for="hints_on"> Show Hints </label>
-                <button type="submit" style="width: 95%;"> START MARATHON MODE </button>
-            </form>
             
-            <form method="POST" action="/regular-game/">
-                {% csrf_token %}
-                <label for="number_of_questions"> Number of Questions: </label> 
-                <input type="number" id="number_of_questions" name="number_of_questions" required > <br>
-                <input type="checkbox" id="hints_on" name="hints_on"> </input>
-                <label for="hints_on"> Show Hints </label>
-                <button type="submit" style="width: 95%;"> START REGULAR GAME </button>
-            </form>
+            <div class="gamemode_div">
+                <h1 class="gamemode_title"> QUIZ MODE </h1>
+                <h3> Generate an amount of flags and guess them all! </h3>
+
+                <form method="POST" action="/regular-game/">
+                    {% csrf_token %}
+                    <label for="number_of_questions"> Number of Questions: </label> 
+                    <input type="number" id="number_of_questions" name="number_of_questions" required > <br>
+                    <input type="checkbox" id="hints_on" name="hints_on"> </input>
+                    <label for="hints_on"> Show Hints </label>
+                    <button type="submit" style="width: 95%;"> START REGULAR GAME </button>
+                </form>
+            </div>
+
+            <div class="gamemode_div">
+                <h1 class="gamemode_title"> MARATHON MODE </h1>
+
+                <h3> Receive one flag at a time and try to build your streak! </h3>
+                <form method="POST" action="/marathon-mode-start/">
+                    {% csrf_token %}
+                    <input type="checkbox" id="hints_on" name="hints_on"> </input>
+                    <label for="hints_on"> Show Hints </label>
+                    <button type="submit" style="width: 95%;"> START MARATHON MODE </button>
+                </form>
+            </div>
 
         </div>
     </body>

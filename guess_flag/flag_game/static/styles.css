@@ -1,10 +1,25 @@
+body {
+    background-image: linear-gradient(to bottom, rgb(188, 228, 224), rgb(152, 178, 199));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
 .title {
     font-size: 20px;
     font-weight: bold;
-    color: rgb(14, 20, 82);
-    background-color: white;
+    color: rgb(199, 255, 243);
+    background-color: rgb(12, 16, 39);
     padding: 10px;
-    border-radius: 5px;
+    border: solid rgb(0, 0, 0) 16px;
+    border-radius: 45px;
+    text-align: center;
+    font-size: 125px;
+    font-weight: bolder;
+    width: 100% - 10px;
+    justify-content: center;
+    font-family: 'Lucida Console';
 }
 
 .home_div {
@@ -12,10 +27,35 @@
     width: 100%;
     padding: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
+
+.gamemode_div {
+    height: 50vh;
+    background-color: rgb(12, 16, 39);
+    color: white;
+    min-width: 30%;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    border: solid rgb(0, 0, 0) 10px;
+    border-radius: 45px;
+}
+
+.gamemode_title {
+    color: rgb(199, 255, 243);
+    font-weight: bolder;
+    font-family: 'Lucida Console';
+    font-size: 50px;
 }

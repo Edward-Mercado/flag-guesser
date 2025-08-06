@@ -7,14 +7,6 @@
     border-radius: 5px;
 }
 
-html, body {
-    height: auto;
-    min-height: 100%;
-    overflow: visible;
-    margin: 0;
-    padding: 0;
-}
-
 .home_div {
     height: auto;
     width: 100%;
@@ -24,4 +16,6 @@ html, body {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
