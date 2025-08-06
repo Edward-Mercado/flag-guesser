@@ -101,33 +101,51 @@ def get_list_of_countries(number_of_questions):
     return questions_list
 
 def convert_to_dictionary_list(unconverted_questions_list):
-    """
-    goal: convert a list-of-dictionary-like string to an actual list of dictionaries
-    reference:
-    [{'correct_answer': 'senegal', 'flag_url': 'generated_flags/senegal.png', 'hint': '_ _ _ e_ al'}, 
-    {'correct_answer': 'lithuania', 'flag_url': 'generated_flags/lithuania.png', 'hint': '_ _ t_ _ _ n_ _ '}, 
-    {'correct_answer': 'canada', 'flag_url': 'generated_flags/canada.png', 'hint': 'ca_ ada'}]
-    
-    handle each key differently
-    remove the first however many letters
-    remove the last character (closing ')
-    leave the excess
-    recreate dictionaries
-    
-    
-    convert string into a list
-    for i in range 20: remove word[0]
-    add the remaining letters to a string
-    call it word
-    do the rest for the others yk
-    """
-    
     split_keys = unconverted_questions_list.split(",")
-    for word in split_keys:
-        word = list(word)
+    
+    necessary_character_keys = []
+    for list_word in split_keys:
+        word = list(list_word)
+        
         if word[3] == "c":
-            word.strip()
-            print(word)
+            for i in range(19):
+                word.remove(word[0])    
+        elif word[3] == "l":
+            for i in range(12):
+                word.remove(word[0])
+        elif word[3] == "i":
+            for i in range(8):
+                word.remove(word[0])
+                
+        for character in word:
+            if character in ["[", "]", "{", "}", "'"]:
+                word.remove(character)
+                
+        if split_keys.index(list_word) % 3 == 2:
+            word.remove(word[len(word) - 1])    
+                
+        word.remove(word[0])
+        
+        cleared_word_string = ""
+        for character in word:
+            cleared_word_string += character
+        
+        necessary_character_keys.append(cleared_word_string)     
+                
+    number_of_dictionaries = int(len(necessary_character_keys) / 3)
+    
+    list_of_dictionaries = []
+    for i in range(number_of_dictionaries):
+        true_index = 3 * i
+        list_of_dictionaries.append(
+            {
+                "correct_answer" : necessary_character_keys[true_index],
+                "flag_url" : necessary_character_keys[true_index + 1],
+                "hint" : necessary_character_keys[true_index + 2],
+            }
+        )
+        
+    return list_of_dictionaries
     
 convert_to_dictionary_list(
     str([{'correct_answer': 'senegal', 'flag_url': 'generated_flags/senegal.png', 'hint': '_ _ _ e_ al'}, 

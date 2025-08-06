@@ -104,13 +104,7 @@ def verify_answer_regular(request):
     
     for i in range(number_of_questions):
         guess = request.POST.get(f"guess_{i}", "invalid_guess")
-        print(unconverted_questions_list)
-        if unconverted_questions_list[i] == guess.lower():
-            correct_guess_count += 1
-            correct_guesses.append(unconverted_questions_list[i])
-        else:
-            incorrect_guess_count += 1
-            incorrect_guesses.append(unconverted_questions_list[i])
+        print(guess)
     
     return HttpResponse("placeholder")
 
