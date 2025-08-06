@@ -9,28 +9,27 @@
     <body>
         <h1> REGULAR GAME </h1>
         <div class = "home_div">
-            <div>
-                <form method="POST" action="/regular-game-answers/">
-                {% csrf_token %}
+            <form method="POST" action="/regular-game-answers/">
+            {% csrf_token %}
+            <input type="hidden" name="questions_list" value="{{ questions_list }}">
+            <input type="hidden" name="hints_on" value="{{ hints_on }}">
+            <div style="display: flex; flex-flow: row wrap">
                 {% for question in questions_list %}
-                <div>
+                <div style="max-height: 100px;">
                     <img src="{% static question.flag_url %}" alt="Flag" class="flag-image">    
                     <!-- <p> {{ question.correct_answer }} </p> --> 
-                    {% if hints_on == "on" %}
+                        {% if hints_on == "on" %}
                         <p> hint: {{ question.hint }} </p>
                     {% endif %}
                     <input type="hidden" name="correct_answer_{{forloop.counter}}" value="{{ question.correct_answer }}">
-                    <input type="hidden" name="questions_list" value="{{ questions_list }}"
                     <label for="guess_{{ forloop.counter }}"> Flag Name: </label>
                     <input type="text" name="guess_{{ forloop.counter }}">
                 </div>
                 {% endfor %}
-                <button type="submit" style="width: 95%;"> SUBMIT YOUR WORK! </button>
-                </form>
-
             </div>
+            <button type="submit" style="width: 95%;"> SUBMIT YOUR WORK! </button>
+            </form>
 
-            
             <a href="/"> HOME </a>
         </div>
     </body>

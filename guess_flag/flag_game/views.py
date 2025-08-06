@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries, convert_to_dictionary_list
-
+from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries
+from .extra_functions import convert_to_dictionary_list, get_accuracy_results
 # Create your views here.
 
 def home(request):
@@ -93,21 +93,57 @@ def loser(request):
     return HttpResponse(template.render(context, request))
 
 def verify_answer_regular(request):
-    number_of_questions = request.POST.get("number_of_questions", 1)
     unconverted_questions_list = request.POST.get("questions_list", "this is pretty bad guys")
-    correct_guess_count = 0
-    correct_guesses = []
-    incorrect_guess_count = 0
-    incorrect_guesses = []
+    hints_on = request.POST.get("hints_on", "off")
     
     questions_list = convert_to_dictionary_list(unconverted_questions_list)
-    
+    number_of_questions = len(questions_list)
+     
+    correct_answers = []
     for i in range(number_of_questions):
-        guess = request.POST.get(f"guess_{i}", "invalid_guess")
-        print(guess)
-    
-    return HttpResponse("placeholder")
+        correct_answers.append(questions_list[i]['correct_answer'])    
 
-
+    guesses = []
+    for i in range(number_of_questions):
+        i_plus_one = i+1
+        guess = request.POST.get(f"guess_{i_plus_one}", "invalid_guess")
+        guesses.append(guess)
+        
+    comparison_tuples = []
+    for i in range(number_of_questions):
+        comparison_tuples.append((correct_answers[i], guesses[i]))
     
+    comparison_lists, percent_correct, number_correct, number_incorrect = get_accuracy_results(comparison_tuples)
+    
+    for output in [comparison_lists, percent_correct, number_correct, number_incorrect]:
+        if output == comparison_lists:
+            for comparison_list in comparison_lists:
+                print(comparison_list)
+        else:
+            print(output)
+    
+    comparison_dictionaries = []
+    for comparison_list in comparison_lists:
+        comparison_dictionaries.append({
+            "correct_answer" : comparison_list[0].title(),
+            "flag_url": f"generated_flags/{snake_case(comparison_list[0])}.png",
+            "guess" : comparison_list[1],
+            "result": comparison_list[2],
+        })
+        
+    if hints_on == "on":
+        were_hints_on = "were"
+    else:
+        were_hints_on = "were not"    
+        
+    context = {
+        "question_results" : comparison_dictionaries,
+        "number_correct" : number_correct,
+        "number_incorrect" : number_incorrect,
+        "percent_correct" : percent_correct,
+        "were_hints_on" : were_hints_on,
+    }
+    template = loader.get_template("regular_game_answers.html")
+    
+    return HttpResponse(template.render(context, request))
     

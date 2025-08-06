@@ -141,3 +141,50 @@ def convert_to_dictionary_list(unconverted_questions_list):
         )
         
     return list_of_dictionaries
+
+def handle_incorrect_answer_exceptions(comparison_tuple):
+    if comparison_tuple[0].lower().strip() in ['chad', 'romania']:
+        if comparison_tuple[1].lower().strip() in ['chad', 'romania']:
+            return "pass"
+    
+    possible_united_states = [
+        "america", "unitedstatesofamerica", "unitedstates", "theunitedstates",
+        "theunitedstatesofamerica", "thestates", "thelandofthefree"
+    ]
+    
+    if comparison_tuple[0].lower().strip() == "united states":
+        if comparison_tuple[1].lower().strip() in possible_united_states:
+            return "pass"
+    
+    if comparison_tuple[0].lower().strip() == "southkorea" and comparison_tuple[1].lower().strip() == "korea":
+        return "pass"
+    
+    if "the " in comparison_tuple[0].lower().strip():
+        if comparison_tuple[0].lower().strip()[4:] == comparison_tuple[1].lower().strip():
+            return "pass"
+        
+    return "not pass"
+    
+def get_accuracy_results(comparison_tuples): # each tuple is formatted as (correct, guess)
+    comparison_lists = []
+    for stupid_comparison_tuple in comparison_tuples:
+        comparison_list = list(stupid_comparison_tuple)
+        question_correct = "incorrect"
+        if comparison_list[1].lower().strip() == comparison_list[0].lower().strip():
+            question_correct = "correct"
+        elif handle_incorrect_answer_exceptions(comparison_list) == "pass":
+            question_correct = "correct"
+            
+        comparison_list.append(question_correct)
+        comparison_lists.append(comparison_list)
+        
+    number_correct, number_incorrect = 0, 0
+    for comparison_list in comparison_lists:
+        if comparison_list[2] == "correct":
+            number_correct += 1
+        else:
+            number_incorrect += 1
+            
+    percent_correct = round(100 * ((number_correct) / (len(comparison_tuples))), 2)
+    
+    return comparison_lists, percent_correct, number_correct, number_incorrect
