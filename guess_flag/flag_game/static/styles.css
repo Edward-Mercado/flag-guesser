@@ -36,17 +36,17 @@ body {
 }
 
 .gamemode_div {
-    height: 50vh;
+    height: 70vh;
     background-color: rgb(12, 16, 39);
     color: white;
-    min-width: 30%;
+    width: 30%;
+    text-align: center;
     padding: 20px;
     margin: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
     border: solid rgb(0, 0, 0) 10px;
@@ -59,3 +59,68 @@ body {
     font-family: 'Lucida Console';
     font-size: 50px;
 }
+
+.description-text {
+    font-family: 'Verdana';
+    font-size: 30px;
+    font-style: italic;
+    color: rgb(232, 255, 250);
+    font-weight: light;
+}
+.gamemode_form_div {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    min-height: 20%;
+    min-width: 90% - 6px;
+    border: solid rgb(255, 255, 255) 6px;
+    border-radius: 14px;
+}
+
+.start_game_button {
+    background-color: rgb(188, 228, 224);
+    font-family: 'Verdana';
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 4px;
+    height: 30px;
+    border-radius: 4px;
+}
+.start_game_button:hover {
+    background-color: rgb(255, 255, 255)
+}
+
+.query_text {
+    font-size: 20px;
+    font-family: Verdana;
+    color: rgb(232, 255, 250);
+    font-weight: bold;
+}
+
+.scrolling {
+    border: 10px solid rgb(21, 22, 24);
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 70px; /* Adjust height as needed */
+    position: relative;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.scrolling img {
+    height: 100%;
+    animation: scroll 50s linear infinite;
+}
+
+ @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-2500%);
+      }
+    }
+    .scroll-container img:last-child {
+      margin-left: 0;
+    }

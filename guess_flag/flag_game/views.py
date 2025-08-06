@@ -2,12 +2,16 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries
-from .extra_functions import convert_to_dictionary_list, get_accuracy_results
+from .extra_functions import convert_to_dictionary_list, get_accuracy_results, get_scrolling_country_flags
 # Create your views here.
 
 def home(request):
     template = loader.get_template('home.html')
-    context = {}
+    context = {
+        "flag_urls" : get_scrolling_country_flags(20),
+        "flag_urls_2" : get_scrolling_country_flags(20),
+    }
+    
     return HttpResponse(template.render(context, request))
 
 def marathon_mode(request):

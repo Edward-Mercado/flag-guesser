@@ -100,6 +100,16 @@ def get_list_of_countries(number_of_questions):
         
     return questions_list
 
+def get_scrolling_country_flags(number_of_countries):
+    flag_urls = []
+    while len(flag_urls) < number_of_countries:
+        added_country = get_random_country()
+        added_country_url = f"generated_flags/{snake_case(added_country)}.png"
+        if added_country_url not in flag_urls:
+            flag_urls.append(added_country_url)
+            
+    return flag_urls
+
 def convert_to_dictionary_list(unconverted_questions_list):
     split_keys = unconverted_questions_list.split(",")
     necessary_character_keys = []

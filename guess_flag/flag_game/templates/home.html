@@ -8,34 +8,72 @@
 
     <body>
         <h1 class="title"> FLAG GUESSER </h1>
+        <p style="text-align: center"> by edward mercado </p>
+        
+        <div class = "scrolling">
+            {% for flag_url in flag_urls %}
+                <img src="{% static flag_url %}" alt="flag" style="border: solid black 3px;">
+            {% endfor %}
+            {% for flag_url in flag_urls %}
+                <img src="{% static flag_url %}" alt="flag" style="border: solid black 3px;">
+            {% endfor %}
+        </div>
+        
         <div class = "home_div">
             
             <div class="gamemode_div">
                 <h1 class="gamemode_title"> QUIZ MODE </h1>
-                <h3> Generate an amount of flags and guess them all! </h3>
 
-                <form method="POST" action="/regular-game/">
-                    {% csrf_token %}
-                    <label for="number_of_questions"> Number of Questions: </label> 
-                    <input type="number" id="number_of_questions" name="number_of_questions" required > <br>
-                    <input type="checkbox" id="hints_on" name="hints_on"> </input>
-                    <label for="hints_on"> Show Hints </label>
-                    <button type="submit" style="width: 95%;"> START REGULAR GAME </button>
-                </form>
+                <hr style="border: 5px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 95%; margin: 20px auto;">
+
+                <h3 class="description-text"> Generate an amount of flags and guess them all! </h3>
+
+                <hr style="border: 5px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 80%; margin: 20px auto;">
+
+                <div class="gamemode_form_div">
+                    <form method="POST" action="/regular-game/">
+                        {% csrf_token %}
+                        <label class="query_text" style="margin: 10px;" for="number_of_questions"> Number of Questions: </label> 
+                        <input style="margin: 10px;" type="number" id="number_of_questions" name="number_of_questions" placeholder="Please input a number." required> <br>
+                        <input style="margin: 10px;" type="checkbox" id="hints_on" name="hints_on"> </input>
+                        <label class="query_text" for="hints_on"> Show Hints </label>
+
+                        <hr style="border: 2px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 80%;">  
+
+                        <button class="start_game_button" type="submit" style="width: 95%;"> START REGULAR GAME </button>
+                    </form>
+                </div>
             </div>
 
             <div class="gamemode_div">
                 <h1 class="gamemode_title"> MARATHON MODE </h1>
+                <hr style="border: 5px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 95%; margin: 20px auto;">
 
-                <h3> Receive one flag at a time and try to build your streak! </h3>
-                <form method="POST" action="/marathon-mode-start/">
-                    {% csrf_token %}
-                    <input type="checkbox" id="hints_on" name="hints_on"> </input>
-                    <label for="hints_on"> Show Hints </label>
-                    <button type="submit" style="width: 95%;"> START MARATHON MODE </button>
-                </form>
+                <h3 class="description-text"> Receive one flag at a time and try to build your streak! </h3>
+                
+                <hr style="border: 5px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 80%; margin: 20px auto;">
+                <div class="gamemode_form_div">
+                    <form method="POST" action="/marathon-mode-start/">
+                        {% csrf_token %}
+                        <input style="margin: 10px;" type="checkbox" id="hints_on" name="hints_on"> </input>
+                        <label class="query_text" style="margin: 10px;" for="hints_on"> Show Hints </label>
+
+                        <hr style="border: 2px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 80%;">  
+
+                        <button class="start_game_button" style="margin: 10px;" type="submit" style="width: 95%;"> START MARATHON MODE </button>
+                    </form>
+                </div>
             </div>
 
+        </div>
+
+        <div class = "scrolling">
+            {% for flag_url in flag_urls_2 %}
+                <img src="{% static flag_url %}" alt="flag" style="border: solid black 3px;">
+            {% endfor %}
+            {% for flag_url in flag_urls_2 %}
+                <img src="{% static flag_url %}" alt="flag" style="border: solid black 3px;">
+            {% endfor %}
         </div>
     </body>
 
