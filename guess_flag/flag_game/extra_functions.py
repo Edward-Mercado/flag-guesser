@@ -102,11 +102,9 @@ def get_list_of_countries(number_of_questions):
 
 def convert_to_dictionary_list(unconverted_questions_list):
     split_keys = unconverted_questions_list.split(",")
-    
     necessary_character_keys = []
     for list_word in split_keys:
         word = list(list_word)
-        
         if word[3] == "c":
             for i in range(19):
                 word.remove(word[0])    
@@ -123,17 +121,14 @@ def convert_to_dictionary_list(unconverted_questions_list):
                 
         if split_keys.index(list_word) % 3 == 2:
             word.remove(word[len(word) - 1])    
-                
         word.remove(word[0])
         
         cleared_word_string = ""
         for character in word:
             cleared_word_string += character
-        
         necessary_character_keys.append(cleared_word_string)     
                 
     number_of_dictionaries = int(len(necessary_character_keys) / 3)
-    
     list_of_dictionaries = []
     for i in range(number_of_dictionaries):
         true_index = 3 * i
@@ -146,9 +141,3 @@ def convert_to_dictionary_list(unconverted_questions_list):
         )
         
     return list_of_dictionaries
-    
-convert_to_dictionary_list(
-    str([{'correct_answer': 'senegal', 'flag_url': 'generated_flags/senegal.png', 'hint': '_ _ _ e_ al'}, 
-    {'correct_answer': 'lithuania', 'flag_url': 'generated_flags/lithuania.png', 'hint': '_ _ t_ _ _ n_ _ '}, 
-    {'correct_answer': 'canada', 'flag_url': 'generated_flags/canada.png', 'hint': 'ca_ ada'}])
-)
