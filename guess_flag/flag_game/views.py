@@ -115,14 +115,7 @@ def verify_answer_regular(request):
         comparison_tuples.append((correct_answers[i], guesses[i]))
     
     comparison_lists, percent_correct, number_correct, number_incorrect = get_accuracy_results(comparison_tuples)
-    
-    for output in [comparison_lists, percent_correct, number_correct, number_incorrect]:
-        if output == comparison_lists:
-            for comparison_list in comparison_lists:
-                print(comparison_list)
-        else:
-            print(output)
-    
+
     comparison_dictionaries = []
     for comparison_list in comparison_lists:
         comparison_dictionaries.append({

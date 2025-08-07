@@ -124,3 +124,8 @@ body {
     .scroll-container img:last-child {
       margin-left: 0;
     }
+
+.input_textbox {
+    background-color: black;
+
+}

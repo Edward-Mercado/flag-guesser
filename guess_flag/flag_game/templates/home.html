@@ -34,7 +34,7 @@
                     <form method="POST" action="/regular-game/">
                         {% csrf_token %}
                         <label class="query_text" style="margin: 10px;" for="number_of_questions"> Number of Questions: </label> 
-                        <input style="margin: 10px;" type="number" id="number_of_questions" name="number_of_questions" placeholder="Please input a number." required> <br>
+                        <input class="input_textbox" style="margin: 10px;" type="number" id="number_of_questions" name="number_of_questions" placeholder="Please input a number." required> <br>
                         <input style="margin: 10px;" type="checkbox" id="hints_on" name="hints_on"> </input>
                         <label class="query_text" for="hints_on"> Show Hints </label>
 
