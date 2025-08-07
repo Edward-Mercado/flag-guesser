@@ -23,7 +23,6 @@ def convert_to_underscore(input_string, integer_likelihood): # converts strings 
     return output_string
 
 def get_flag_image(country_name):
-
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(BASE_DIR, "valid_countries.json")
     
