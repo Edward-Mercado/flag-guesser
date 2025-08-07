@@ -6,6 +6,27 @@ body {
 
 }
 
+.enter_box {
+    background-color: rgb(214, 243, 255);
+    color: rgb(17, 22, 26);
+    font: Verdana;
+}
+.enter_box:focus {
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: white;
+    color: rgb(0, 47, 100);
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.flag-image {
+    height: 100px;
+    width: 160px;
+    border: black solid 6px;
+    border-radius: 10px;
+}
+
 .title {
     font-size: 20px;
     font-weight: bold;
@@ -23,6 +44,19 @@ body {
 }
 
 .home_div {
+    height: auto;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.marathon_div {
     height: auto;
     width: 100%;
     padding: 20px;
@@ -86,6 +120,8 @@ body {
     padding: 4px;
     height: 30px;
     border-radius: 4px;
+    width: 100%;
+    margin: 20px;
 }
 .start_game_button:hover {
     background-color: rgb(255, 255, 255)
@@ -125,23 +161,7 @@ body {
       margin-left: 0;
     }
 
-.enter_box {
-    background-color: rgb(214, 243, 255);
-    color: rgb(17, 22, 26);
-    font: Verdana;
-}
-.enter_box:focus {
-    border-width: 3px;
-    border-radius: 5px;
-    border-color: white;
-    color: rgb(0, 47, 100);
-    font-style: italic;
-    font-weight: bolder;
-}
 
-.flag_image {
-    height: 100px;
-    width: 160px;
-    border: black solid 6px;
-    border-radius: 10px;
+.color_picker {
+color: black
 }

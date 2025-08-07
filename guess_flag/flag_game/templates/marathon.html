@@ -4,35 +4,108 @@
     <head>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <title> MARATHON MODE </title>
+        <style>
+.flag-image {
+    height: auto;
+    width: 100%;
+    border: white solid 6px;
+    border-radius: 5px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+}
+.marathon_div {
+    height: auto;
+    width: 100% - 20px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    background-color: rgb(12, 16, 39);
+    color: white;
+    border: black 15px solid;
+    border-radius: 30px;
+}
+.enter_box {
+    background-color: rgb(214, 243, 255);
+    color: rgb(17, 22, 26);
+    font: Verdana;
+    height: 30px;
+    width: 70%;
+}
+.enter_box:focus {
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: white;
+    color: rgb(0, 47, 100);
+    font-style: italic;
+    font-weight: bolder;
+}
 
+.streak_div {
+    font-family:'Lucida Console';
+    font-size: 25px; 
+    font-style: italic;
+    align-content: right;
+    align-items: right;
+    justify-content: right;
+    display: flex;
+    margin: 20px;
+}
+
+.extra_start_game {
+    padding: 10px;
+    text-decoration: none;
+    height: 30px;
+    text-align: center;
+    width: auto;
+    width: 100%; margin: 20px auto;
+}
+
+.guess_div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 25px;
+    font-family: "Verdana";
+    font-style: italic;
+}
+        </style>
     </head>
 
     <body>
-        <h1> MARATHON MODE </h1>
-        <div class = "home_div">
+        <h1 class="title"> MARATHON MODE </h1>
+        <div class = "marathon_div">
+            <div class="streak_div">
+                <p> CURRENT STREAK: {{ current_streak }} </p>
+            </div>
             <img src="{% static flag %}" alt="Flag" class="flag-image">
             <!-- <p> {{ correct_answer }} </p> --> 
-            <p> Current Streak: {{ current_streak }} </p>
-            
-            <div>
                 <form method="POST" action="/marathon-mode/">
                 {% csrf_token %}
                 <input type="hidden" name="correct_answer" value="{{ correct_answer }}">
                 <input type="hidden" name="current_streak" value="{{ current_streak }}">  
-                <input type="hidden" name="hints_on" value="{{ hints_on }}">  
-                <label for="guess"> Flag Name: </label> 
-                <input type="text" id="guess" name="guess" required > <br>
-                <button type="submit" style="width: 95%;"> SUBMIT </button>
+                <input type="hidden" name="hints_on" value="{{ hints_on }}">
+                <div class="guess_div">  
+                    <label for="guess"> Flag Name: </label> 
+                    <input style="margin: 10px" class="enter_box"type="text" id="guess" name="guess" required placeholder="What country is this?" > <br>
+                </div>
+                <button class="start_game_button" type="submit" style="width: 100%; margin: 20px auto;"> SUBMIT </button>
                 
                 {% if hints_on == "on" %}
                 <p> Hint: {{ hint }} </p>
                 {% endif %}
                 </form>
-
-            </div>
-
             
-            <a href="/"> HOME </a>
+                <hr style="border: 5px solid black; border-color: rgba(253, 255, 255, 1); border-radius: 5px; width: 100%; margin: 20px auto;">
+
+            <a class="start_game_button extra_start_game" href="/"> HOME </a>
         </div>
     </body>
 
