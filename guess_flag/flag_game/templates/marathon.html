@@ -2,7 +2,8 @@
 {% load static %}
 <html> 
     <head>
-        <link rel="stylesheet" href="{% static 'productionfiles/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'additional_styles.css' %}">
         <title> MARATHON MODE </title>
         <style>
         </style>
@@ -24,8 +25,8 @@
                 <div class="guess_div">  
                     <label for="guess"> Flag Name: </label> 
                     <input style="margin: 10px" class="enter_box"type="text" id="guess" name="guess" required placeholder="What country is this?" > <br>
+                    <button class="start_game_button" type="submit"> SUBMIT </button>
                 </div>
-                <button class="start_game_button" type="submit" style="width: 100%; margin: 20px auto;"> SUBMIT </button>
                 
                 {% if hints_on == "on" %}
                 <p> Hint: {{ hint }} </p>
@@ -34,7 +35,7 @@
             
                 <hr style="border: 5px solid black; border-color: rgba(253, 255, 255, 1); border-radius: 5px; width: 80%; margin: 20px auto;">
 
-            <a class="start_game_button" href="/"> HOME </a>
+            <a class="start_game_button" style="width: 100%;" href="/"> HOME </a>
         </div>
     </body>
 
