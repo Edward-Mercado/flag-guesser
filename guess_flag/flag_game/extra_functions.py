@@ -198,3 +198,13 @@ def get_accuracy_results(comparison_tuples): # each tuple is formatted as (corre
     percent_correct = round(100 * ((number_correct) / (len(comparison_tuples))), 2)
     
     return comparison_lists, percent_correct, number_correct, number_incorrect
+
+def check_if_correct(comparison_tuple):
+    comparison_list = list(comparison_tuple)
+    question_correct = "incorrect"
+    if comparison_list[1].lower().strip() == comparison_list[0].lower().strip():
+        question_correct = "correct"
+    elif handle_incorrect_answer_exceptions(comparison_list) == "pass":
+        question_correct = "correct"
+        
+    return question_correct == "correct"

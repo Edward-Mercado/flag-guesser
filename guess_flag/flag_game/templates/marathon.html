@@ -4,14 +4,14 @@
     <head>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <link rel="stylesheet" href="{% static 'additional_styles.css' %}">
-        <title> MARATHON MODE </title>
-        <style>
-        </style>
+        <link rel="stylesheet" href="{% static 'additional_styles2.css' %}">
+        <title> MARATHON: STREAK {{ current_streak }} </title>
+
     </head>
 
     <body>
         <h1 class="title"> MARATHON MODE </h1>
-        <div class = "marathon_div">
+        <div class = "marathon_div" style="width: 90%">
             <div class="streak_div">
                 <p> CURRENT STREAK: {{ current_streak }} </p>
             </div>
@@ -29,10 +29,10 @@
                 </div>
                 
                 {% if hints_on == "on" %}
-                <p> Hint: {{ hint }} </p>
+                    <p style= "font-family: Verdana"> Hint: {{ hint }} </p>
                 {% endif %}
                 </form>
-            
+
                 <hr style="border: 5px solid black; border-color: rgba(253, 255, 255, 1); border-radius: 5px; width: 80%; margin: 20px auto;">
 
             <a class="start_game_button" style="width: 100%;" href="/"> HOME </a>

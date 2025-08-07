@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries
-from .extra_functions import convert_to_dictionary_list, get_accuracy_results, get_scrolling_country_flags
+from .extra_functions import convert_to_dictionary_list, get_accuracy_results, get_scrolling_country_flags, check_if_correct
 # Create your views here.
 
 def home(request):
@@ -19,7 +19,7 @@ def marathon_mode(request):
     template = loader.get_template('marathon.html')
     
     next_country = get_random_country()
-    flag_file_path = f"generated_flags/{next_country}.png"
+    flag_file_path = f"generated_flags/{snake_case(next_country)}.png"
     hints_on = request.POST.get("hints_on", "off")
     
     context = {
@@ -34,6 +34,7 @@ def marathon_mode(request):
 
 def regular_game_processing(request):
     successful = True
+    
     try:
         number_of_questions = int(request.POST.get("number_of_questions", 0))
         if number_of_questions < 1:
@@ -66,9 +67,11 @@ def verify_answer_marathon(request): # this is the actual function that gets cal
     correct_answer = request.POST.get("correct_answer", "").lower() 
     hints_on = request.POST.get("hints_on", "off")
     
-    if guess.strip().lower() == correct_answer.strip().lower():
+    correct = check_if_correct((correct_answer, guess))
+    
+    if correct == True:
         next_country = get_random_country()
-        flag_file_path = f"generated_flags/{next_country}.png"
+        flag_file_path = f"generated_flags/{snake_case(next_country)}.png"
         
         integer_likelihood = 5 - int(next_country.count(" "))
 
@@ -83,13 +86,40 @@ def verify_answer_marathon(request): # this is the actual function that gets cal
         
     else:
         template = loader.get_template('loser.html')
-        context = {}
+        if hints_on == "on":
+            hints_on_flavor_text = "were"
+        else:
+            hints_on_flavor_text = "were not"
+            
+        context = {
+            "current_streak": int(streak),
+            "guess" : guess,
+            "guess_or_quit" : "You guessed",
+            "flag" : f"generated_flags/{snake_case(correct_answer)}.png",
+            "hints_on_flavor_text": hints_on_flavor_text,
+            "correct_answer": correct_answer.title(),
+        }
         
     return HttpResponse(template.render(context, request))
 
 def loser(request):
+    streak = request.POST.get('current_streak', -1)
+    correct_answer = request.POST.get("correct_answer", "").lower() 
+    hints_on = request.POST.get("hints_on", "off")
+    if hints_on == "on":
+        hints_on_flavor_text = "were"
+    else:
+        hints_on_flavor_text = "were not"
+    
     template = loader.get_template("loser.html")
-    context = { }
+    context = { 
+        "streak": streak,
+        "correct_answer": correct_answer.title(),
+        "guess_or_quit" : "You gave up",
+        "hints_on_flavor_text": hints_on_flavor_text,
+        "guess": None,
+        "flag": f"generated_flags/{snake_case(correct_answer)}.png",
+    }
     
     return HttpResponse(template.render(context, request))
 

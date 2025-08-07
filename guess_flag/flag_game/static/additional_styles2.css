@@ -1,0 +1,47 @@
+.loser_div {
+    height: auto;
+    width: 100% - 20px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    background-color: rgb(12, 16, 39);
+    color: white;
+    border: black 15px solid;
+    border-radius: 30px;
+    align-items: center;
+}
+
+h2 {
+    font-family: "Verdana";
+    font-size: 35px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.flag_review_div {
+    border: white 10px solid;
+    border-radius: 20px;
+    width: 90%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flag_image {
+    width: auto;
+    height: 200px;
+    margin: 20px;
+    border: white 4px solid;
+}
+
+h4 {
+    font-family: "Verdana";
+    font-size: 20px;
+    font-weight: bold;
+}
