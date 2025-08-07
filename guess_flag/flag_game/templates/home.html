@@ -4,6 +4,22 @@
     <head>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <title> Flag Guessing Game </title>
+        <style>
+
+.enter_box {
+    background-color: rgb(214, 243, 255);
+    color: rgb(17, 22, 26);
+    font: Verdana;
+}
+.enter_box:focus {
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: white;
+    color: rgb(0, 47, 100);
+    font-style: italic;
+    font-weight: bolder;
+}
+        </style>
     </head>
 
     <body>
@@ -34,7 +50,7 @@
                     <form method="POST" action="/regular-game/">
                         {% csrf_token %}
                         <label class="query_text" style="margin: 10px;" for="number_of_questions"> Number of Questions: </label> 
-                        <input class="input_textbox" style="margin: 10px;" type="number" id="number_of_questions" name="number_of_questions" placeholder="Please input a number." required> <br>
+                        <input class="enter_box" style="margin: 10px;" type="number" id="number_of_questions" name="number_of_questions" placeholder="Please input a number." required> <br>
                         <input style="margin: 10px;" type="checkbox" id="hints_on" name="hints_on"> </input>
                         <label class="query_text" for="hints_on"> Show Hints </label>
 

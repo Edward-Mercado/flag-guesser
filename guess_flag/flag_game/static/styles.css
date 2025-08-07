@@ -125,7 +125,23 @@ body {
       margin-left: 0;
     }
 
-.input_textbox {
-    background-color: black;
+.enter_box {
+    background-color: rgb(214, 243, 255);
+    color: rgb(17, 22, 26);
+    font: Verdana;
+}
+.enter_box:focus {
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: white;
+    color: rgb(0, 47, 100);
+    font-style: italic;
+    font-weight: bolder;
+}
 
+.flag_image {
+    height: 100px;
+    width: 160px;
+    border: black solid 6px;
+    border-radius: 10px;
 }
