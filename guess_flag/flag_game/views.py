@@ -171,4 +171,3 @@ def verify_answer_regular(request):
     template = loader.get_template("regular_game_answers.html")
     
     return HttpResponse(template.render(context, request))
-    
