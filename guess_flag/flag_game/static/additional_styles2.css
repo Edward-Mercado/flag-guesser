@@ -45,3 +45,83 @@ h4 {
     font-size: 20px;
     font-weight: bold;
 }
+
+.quiz_mode_div {
+    height: auto;
+    width: 100% - 20px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    background-color: rgb(12, 16, 39);
+    color: white;
+    border: black 15px solid;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.questions_list_div {
+    padding: 30px;
+    display: flex; 
+    flex-flow: row wrap; 
+    margin: 4px;
+}
+
+.question_div {
+    border: solid black 4px;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+    max-width: 30%;
+    background: rgb(9, 41, 83);
+    min-width: 300px;
+}
+
+.flag_image_quiz {
+    width: auto;
+    height: 70%-10px;
+    margin: 20px;
+    border: white 4px solid;
+}
+
+.game_finish {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(199, 255, 243);
+    background-color: rgb(14, 42, 75);
+    border: solid rgb(0, 0, 0) 16px;
+    border-radius: 45px;
+    text-align: center;
+    font-size: 125px;
+    font-weight: bolder;
+    width: 100% - 10px;
+    justify-content: center;
+    font-family: 'Lucida Console';
+}
+
+.game_review_div {
+    border: white solid 4px;
+    border-radius: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+h3 {
+    font-family: "Verdana";
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.additional_question_styling {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}

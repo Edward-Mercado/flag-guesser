@@ -5,34 +5,39 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <link rel="stylesheet" href="{% static 'additional_styles.css' %}">
         <link rel="stylesheet" href="{% static 'additional_styles2.css' %}">
-        
-        <title> QUIZ MODE RESULTS </title>
+
+        <style>
+
+        </style>
+
+        <title> QUIZ MODE </title>
     </head>
 
     <body>
-        <h1> REGULAR GAME </h1>
-        <div class = "home_div">
+        <h1 class="title"> REGULAR GAME </h1>
+        <div class = "quiz_mode_div">
             <form method="POST" action="/regular-game-answers/">
             {% csrf_token %}
             <input type="hidden" name="questions_list" value="{{ questions_list }}">
             <input type="hidden" name="hints_on" value="{{ hints_on }}">
-            <div style="display: flex; flex-flow: row wrap; border: solid black 4px; margin: 4px;">
+            <div class="questions_list_div">
                 {% for question in questions_list %}
-                <div style="border: solid black 4px; margin: 4px;">
-                    <img src="{% static question.flag_url %}" style="border: solid black 4px" alt="Flag" class="flag-image">    
+                <div class="question_div">
+                    <img src="{% static question.flag_url %}" style="border: solid black 4px" alt="Flag" class="flag_image_quiz">    
                     <!-- <p> {{ question.correct_answer }} </p> --> 
-                        {% if hints_on == "on" %}
+                    <hr style="border: 2px solid black; border-color: rgb(199, 255, 243); border-radius: 5px; width: 90%; margin: 20px auto;">
+                    {% if hints_on == "on" %}
                         <p> hint: {{ question.hint }} </p>
                     {% endif %}
                     <input type="hidden" name="correct_answer_{{forloop.counter}}" value="{{ question.correct_answer }}">
                     <label for="guess_{{ forloop.counter }}"> Flag Name: </label>
-                    <input type="text" name="guess_{{ forloop.counter }}">
+                    <input class="enter_box" style="width:95%" type="text" name="guess_{{ forloop.counter }}">
                 </div>
                 {% endfor %}
             </div>
-            <button type="submit" style="width: 95%;"> SUBMIT YOUR WORK! </button>
+            <button class="start_game_button" type="submit" style="width: 95%;"> SUBMIT YOUR WORK! </button>
             </form>
 
-            <a href="/"> HOME </a>
+            <a class="start_game_button" style="width: 100%" href="/"> HOME </a>
         </div>
     </body>

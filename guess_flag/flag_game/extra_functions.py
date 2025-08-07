@@ -208,3 +208,9 @@ def check_if_correct(comparison_tuple):
         question_correct = "correct"
         
     return question_correct == "correct"
+
+def get_background_color(result):
+    if result == "correct":
+        return "#00911F"
+    else:
+        return "#A01A1A"

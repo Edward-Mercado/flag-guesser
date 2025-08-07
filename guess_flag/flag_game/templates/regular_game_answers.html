@@ -5,29 +5,33 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <link rel="stylesheet" href="{% static 'additional_styles.css' %}">
         <link rel="stylesheet" href="{% static 'additional_styles2.css' %}">
-        <title> QUIZ MODE </title>
+        <title> QUIZ MODE RESULTS </title>
     </head>
     <body>
-        <div class="home_div">
+        <div class="quiz_mode_div">
             <div> 
-                <h1> GAME FINISH </h1>
-                <h2> Percent Accuracy: {{ percent_correct }}% </h2>
-                <h2> Amount Correct: {{ number_correct }} </h2>
-                <h2> Amount Incorrect: {{ number_incorrect}} </h2>
-                <h2> Hints {{ were_hints_on }} on. </h2>
-                <div style="display: flex; flex-flow: row wrap; border: solid black 4px; margin: 4px;">
+                <h1 class="game_finish"> GAME FINISH! </h1>
+                <div class="game_review_div">
+                <h2 style="font-size: 50px; color: rgb(199, 255, 243)"> GAME REVIEW </h2>
+                <hr style="border: 2px solid black; border-color: rgba(253, 255, 255, 1); border-radius: 5px; width: 80%; margin: 20px auto; margin-top: 0px;">
+                    <h3> Percent Accuracy: {{ percent_correct }}% </h2>
+                    <h3> Amount Correct: {{ number_correct }} </h2>
+                    <h3> Amount Incorrect: {{ number_incorrect}} </h2>
+                    <h3> Hints {{ were_hints_on }} on. </h2>
+                </div>
+                <div class="questions_list_div">
                     {% for question_result in question_results %}
-                        <div style="margin: 20px; padding: 20px; border: solid black 4px; margin: 4px;">
-                        <p> {{ question_result.result }} </p>
-                        <img src="{% static question_result.flag_url %}" style="border: solid black 4px" alt="Flag" class="flag-image">  
-                        <p> Correct Answer: {{ question_result.correct_answer }} </p>
-                        <p> You guessed: {{ question_result.guess }} </p>
+                        <div class="question_div additional_question_styling" style="background-color: {{ question_result.background_color }}">
+                        <h2> {{ question_result.result }} </h2>
+                        <img src="{% static question_result.flag_url %}" style="border: solid black 4px" alt="Flag" class="flag_image_quiz">  
+                        <h4> Correct Answer: {{ question_result.correct_answer }} </h4>
+                        <h4> You guessed: {{ question_result.guess }} </h4>
                         </div>
                     {% endfor %}
-                </div>
-                    
-                <a href="/"> Back Home </a>
+                    </div>
             </div>
+            <hr style="border: 2px solid black; border-color: rgba(253, 255, 255, 1); border-radius: 5px; width: 80%; margin: 20px auto; margin-top: 0px;">
+            <a class="start_game_button" style="width: 100%;" href="/"> Back Home </a>
         </div>
     </body>
 </html>

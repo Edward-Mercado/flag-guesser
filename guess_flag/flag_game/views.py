@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries
+from .extra_functions import snake_case, get_random_country, convert_to_underscore, get_list_of_countries, get_background_color
 from .extra_functions import convert_to_dictionary_list, get_accuracy_results, get_scrolling_country_flags, check_if_correct
 # Create your views here.
 
@@ -152,7 +152,8 @@ def verify_answer_regular(request):
             "correct_answer" : comparison_list[0].title(),
             "flag_url": f"generated_flags/{snake_case(comparison_list[0])}.png",
             "guess" : comparison_list[1],
-            "result": comparison_list[2],
+            "background_color" : get_background_color(comparison_list[2]),
+            "result": comparison_list[2].upper(),
         })
         
     if hints_on == "on":
